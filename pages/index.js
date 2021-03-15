@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta property="og:image" content={db.bg} />
+        <meta name="og:image" content={db.bg} />
       </Head>
       <QuizBackground backgroundImage={db.bg}>
         <QuizContainer>
