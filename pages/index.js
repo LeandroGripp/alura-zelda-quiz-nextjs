@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import Head from 'next/head'
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import Widget from '../src/components/Widget';
 import Footer from '../src/components/Footer';
@@ -8,6 +9,8 @@ import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
 
 import db from '../db.json';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
 
 const QuizContainer = styled.div`
   width: 100%;
@@ -21,9 +24,14 @@ const QuizContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+
+  const [name, setName] = useState('');
+
   return (
     <>
       <Head>
+        <title>AluraQuiz - The Legend of JavaScript</title>
         <meta name="og:image" content={db.bg} />
       </Head>
       <QuizBackground backgroundImage={db.bg}>
@@ -33,14 +41,31 @@ export default function Home() {
               <h1>The Legend of Zelda</h1>
             </Widget.Header>
             <Widget.Content>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, recusandae!</p>
+              <form onSubmit={(infosDoEvento) => {
+                infosDoEvento.preventDefault();
+
+                router.push(`quiz?name=${name}`);
+              }}
+              >
+                <Input
+                  name="nomedoUsuario"
+                  value={name}
+                  onChange={(e) => { setName(e.target.value); }}
+                  placeholder="Diz aí seu nome"
+                />
+                <Button type="submit" disabled={name.length === 0}>
+                  Jogar
+                  {' '}
+                  {name}
+                </Button>
+              </form>
             </Widget.Content>
           </Widget>
 
           <Widget>
             <Widget.Content>
               <h1>Quiz da galera</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, recusandae!</p>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem!</p>
             </Widget.Content>
           </Widget>
           <Footer />
