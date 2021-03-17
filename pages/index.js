@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -7,21 +6,12 @@ import Widget from '../src/components/Widget';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
-
-import db from '../db.json';
+import QuizContainer from '../src/components/QuizContainer';
+import QuizLogo from '../src/components/QuizLogo';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
 
-const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
+import db from '../db.json';
 
 export default function Home() {
   const router = useRouter();
@@ -36,6 +26,7 @@ export default function Home() {
       </Head>
       <QuizBackground backgroundImage={db.bg}>
         <QuizContainer>
+          <QuizLogo />
           <Widget>
             <Widget.Header>
               <h1>The Legend of Zelda</h1>
@@ -54,9 +45,7 @@ export default function Home() {
                   placeholder="Diz aí seu nome"
                 />
                 <Button type="submit" disabled={name.length === 0}>
-                  Jogar
-                  {' '}
-                  {name}
+                  {`Jogar ${name}`}
                 </Button>
               </form>
             </Widget.Content>
