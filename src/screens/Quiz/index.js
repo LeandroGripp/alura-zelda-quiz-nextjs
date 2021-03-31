@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
-import Widget from '../src/components/Widget';
-import QuizLogo from '../src/components/QuizLogo';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import Button from '../src/components/Button';
-import AlternativesForm from '../src/components/AlternativesForm';
-
-import db from '../db.json';
+import Widget from '../../components/Widget';
+import QuizLogo from '../../components/QuizLogo';
+import QuizBackground from '../../components/QuizBackground';
+import QuizContainer from '../../components/QuizContainer';
+import Button from '../../components/Button';
+import AlternativesForm from '../../components/AlternativesForm';
+import BackLinkArrow from '../../components/BackLinkArrow';
 
 function LoadingWidget() {
   return (
@@ -78,7 +77,7 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
-        {/* <BackLinkArrow href="/" /> */}
+        <BackLinkArrow href="/" />
         <h3>
           {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
         </h3>
@@ -157,7 +156,7 @@ const screenStates = {
   LOADING: 'LOADING',
   RESULT: 'RESULT',
 };
-export default function QuizPage() {
+export default function QuizScreen({ db }) {
   const [screenState, setScreenState] = useState(screenStates.LOADING);
   const totalQuestions = db.questions.length;
   const [currentQuestion, setCurrentQuestion] = useState(0);
